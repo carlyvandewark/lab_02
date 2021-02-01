@@ -44,13 +44,19 @@ need to set the class attribute to `"POSIXct"`
 
 ```{r}
 z <- seq(0, 3600 * 10, by = 3600)
+
+attr(z, which = "class") <- "POSIXct"
+
+z
 ```
 
 What do you notice about the date-time? If you are unsure, check out
 [Unix Epoch](https://en.wikipedia.org/wiki/Unix_time). A time converter is
 available [here](https://www.epochconverter.com).
 
+These times are in the user's local time (for me, that is EST).
 
+POSIX time is the number of seconds elapsed since January 1, 1970 so all these date-times are right around then.
 
 ## Subsetting
 
@@ -66,12 +72,29 @@ Complete the following without using any loops.
 
 1. Subset only the letters from `x`.
 
+```{r}
+x[is.na(as.numeric(x))]
+```
+
 2. Subset only the negative numbers from `x`.
+
+```{r}
+x[x<0]
+```
 
 3. Select the numbers divisible by 3 from `x`.
 
+```{r}
+p <- as.numeric(x[!is.na(as.numeric(x))])
+p[p %% 3 == 0]
+```
+
 4. Remove all values with an even index from `x`.
 
+```{r}
+x <- x[which(x == x) %% 2 == 1]
+x
+```
 
 
 ## Git from the command line
